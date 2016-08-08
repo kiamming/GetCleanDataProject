@@ -68,7 +68,11 @@ all_combined = cbind(x_combined, y_combined, subject_combined)
 
 # average all numeric columns except for the two columns matching "activity" & "subject"
 averages_combined <- ddply(all_combined, .(subject, activity), function(x) colMeans(all_combined[, !(names(all_combined) %in% c("subject", "activity"))]))
+
 # another way
 # tidydata<-summarise_each(group_by(all_combined,activity,subject),funs(mean))
+
+# yet another way, using %>%
+# tidy_df <- tidy_df %>% group_by(Subject, Activity) %>% summarize_each(funs(mean))
 
 write.table(averages_combined, "averages_combined.txt", row.name=FALSE)
